@@ -1,26 +1,18 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { ShieldCheck, Mail, Lock, ArrowRight, Shield, Activity, RefreshCw, AlertCircle } from "lucide-react";
 import api from "../api/api";
 
 export default function Login() {
   const navigate = useNavigate();
 
-  const [email, setEmail] =
-    useState("");
-
-  const [password, setPassword] =
-    useState("");
-
-  const [error, setError] =
-    useState("");
-
-  const [isLoading, setIsLoading] =
-    useState(false);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    const token =
-      localStorage.getItem("token");
-
+    const token = localStorage.getItem("token");
     if (token) {
       navigate("/admin");
     }
@@ -28,219 +20,174 @@ export default function Login() {
 
   const handleLogin = async (e) => {
     e.preventDefault();
-
     setError("");
-
     setIsLoading(true);
 
     try {
-      const res = await api.post(
-        "/auth/login",
-        {
-          email,
-          password,
-        }
-      );
-
-      localStorage.setItem(
-        "token",
-        res.data.token
-      );
-
+      const res = await api.post("/auth/login", { email, password });
+      localStorage.setItem("token", res.data.token);
       navigate("/admin");
     } catch (error) {
       console.error(error);
-
-      setError(
-        "Invalid credentials"
-      );
+      setError("Invalid administrative credentials");
     } finally {
       setIsLoading(false);
     }
   };
 
   return (
-    <div className="min-h-screen bg-[#020617] text-white overflow-hidden relative w-[100vw]">
-      {/* Background */}
-      <div className="absolute inset-0">
-        <div className="absolute top-[-200px] left-[-150px] w-[500px] h-[500px] bg-blue-600/20 rounded-full blur-3xl" />
-
-        <div className="absolute bottom-[-250px] right-[-150px] w-[500px] h-[500px] bg-violet-600/20 rounded-full blur-3xl" />
-
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[length:24px_24px]" />
+    <div className="min-h-screen bg-[#030712] text-slate-100 overflow-hidden relative w-full antialiased font-sans selection:bg-blue-500/30">
+      {/* Ambient Gradient Background */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute top-[-10%] left-[-10%] w-[600px] h-[600px] bg-blue-600/10 rounded-full blur-[140px]" />
+        <div className="absolute bottom-[-10%] right-[-10%] w-[600px] h-[600px] bg-violet-600/10 rounded-full blur-[140px]" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.015)_1px,transparent_1px)] bg-[length:32px_32px]" />
       </div>
 
       <div className="relative z-10 min-h-screen grid lg:grid-cols-2">
-        {/* Left Side */}
-        <div className="hidden lg:flex flex-col justify-between p-14 border-r border-white/10">
-          <div>
-            <div className="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-white/5 border border-white/10 backdrop-blur-xl">
-              <div className="w-2.5 h-2.5 rounded-full bg-green-400 animate-pulse" />
+        {/* Left Panel - Branding & Highlights (Desktop Only) */}
 
-              <span className="text-sm text-gray-300">
-                Secure Administrative
-                Network
+        <div className="hidden lg:flex flex-col justify-between p-16 border-r border-slate-900/60 bg-slate-950/20 backdrop-blur-xs">
+          <div> <img src="/logo.png" alt="Brand Logo" className="h-16 rounded-full my-4" />
+            <div className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-slate-900/80 border border-slate-800/80 backdrop-blur-md">
+
+
+              <span className="text-xs font-semibold tracking-wide text-slate-300 uppercase">
+                Secure Administrative Network
               </span>
             </div>
 
-            <h1 className="text-6xl font-black leading-tight mt-10 tracking-tight">
-              Field
-              <br />
-              Reporting
-              <br />
+            <h1 className="text-5xl xl:text-6xl font-black tracking-tight leading-[1.1] mt-12 bg-gradient-to-b from-white via-slate-200 to-slate-400 bg-clip-text text-transparent">
+              Field <br />
+              Reporting <br />
               Platform
             </h1>
 
-            <p className="text-gray-400 text-lg mt-8 max-w-lg leading-relaxed">
-              Enterprise-grade employee
-              reporting and media
-              submission infrastructure for
-              secure operational workflows.
+            <p className="text-slate-400 text-base xl:text-lg mt-6 max-w-md leading-relaxed font-medium">
+              Enterprise-grade employee reporting and media submission infrastructure engineered for secure operational workflows.
             </p>
           </div>
 
-          {/* Bottom Metrics */}
-          <div className="grid grid-cols-3 gap-5">
-            <div className="bg-white/5 border border-white/10 backdrop-blur-xl rounded-3xl p-5">
-              <h2 className="text-3xl font-bold">
-                24/7
-              </h2>
-
-              <p className="text-gray-400 text-sm mt-2">
-                Availability
-              </p>
-            </div>
-
-            <div className="bg-white/5 border border-white/10 backdrop-blur-xl rounded-3xl p-5">
-              <h2 className="text-3xl font-bold">
-                AES
-              </h2>
-
-              <p className="text-gray-400 text-sm mt-2">
-                Security
-              </p>
-            </div>
-
-            <div className="bg-white/5 border border-white/10 backdrop-blur-xl rounded-3xl p-5">
-              <h2 className="text-3xl font-bold">
-                Live
-              </h2>
-
-              <p className="text-gray-400 text-sm mt-2">
-                Monitoring
-              </p>
-            </div>
+          {/* Infrastructure Metrics */}
+          <div className="grid grid-cols-3 gap-4">
+            <MetricBlock label="Availability" value="24/7" icon={RefreshCw} />
+            <MetricBlock label="Encryption" value="AES" icon={Shield} />
+            <MetricBlock label="Monitoring" value="Live" icon={Activity} />
           </div>
         </div>
 
-        {/* Right Side */}
-        <div className="flex items-center justify-center p-6 md:p-10">
-          <div className="w-full max-w-md">
-            {/* Mobile Branding */}
-            <div className="lg:hidden mb-10 text-center">
-              <h1 className="text-4xl font-black">
-                Field Reporting
+        {/* Right Panel - Login Interaction Area */}
+        <div className="flex items-center justify-center p-6 md:p-12">
+          <div className="w-full max-w-md space-y-8">
+            {/* Mobile Adaptive Header */}
+            <div className="lg:hidden text-center space-y-2">
+              <h1 className="text-3xl font-extrabold tracking-tight text-white">
+                Field Reporting System
               </h1>
-
-              <p className="text-gray-400 mt-3">
-                Secure Admin Portal
+              <p className="text-sm text-slate-400 font-medium">
+                Secure Management Portal
               </p>
             </div>
 
-            {/* Login Card */}
-            <div className="bg-white/5 border border-white/10 backdrop-blur-2xl rounded-[32px] p-8 md:p-10 shadow-2xl">
+            {/* Login Architecture Wrapper */}
+            <div className="bg-slate-900/40 border border-slate-800/80 backdrop-blur-xl rounded-[2.5rem] p-8 md:p-10 shadow-2xl shadow-black/40">
               <div className="mb-8">
-                <div className="w-16 h-16 rounded-2xl bg-white/10 flex items-center justify-center text-3xl mb-5">
-                  🔐
+                <div className="md:h-12 md:w-12 rounded-2xl bg-blue-500/10 border border-blue-500/20 flex items-center justify-center text-blue-400 mb-5 shadow-inner">
+                  <ShieldCheck className="w-6 h-6" />   <img src="/logo.png" alt="Brand Logo" className="h-6 rounded-lg m-4 md:hidden flex" />
                 </div>
 
-                <h2 className="text-4xl font-bold tracking-tight">
+              
+                <h2 className="text-2xl font-bold tracking-tight text-slate-100">
                   Welcome Back
                 </h2>
-
-                <p className="text-gray-400 mt-3">
-                  Authenticate to access the
-                  control center.
+                 <p className="text-xs sm:text-sm text-slate-400 font-medium mt-1.5">
+                  Authenticate credentials to access the central operations panel.
                 </p>
               </div>
 
-              {/* Error */}
+              {/* Server/Validation Response Output */}
               {error && (
-                <div className="mb-6 bg-red-500/10 border border-red-500/20 text-red-300 px-5 py-4 rounded-2xl text-sm">
-                  {error}
+                <div className="mb-6 bg-rose-500/10 border border-rose-500/20 text-rose-300 px-4 py-3.5 rounded-xl text-xs sm:text-sm flex items-center gap-3 font-medium">
+                  <AlertCircle className="w-4 h-4 text-rose-400 flex-shrink-0" />
+                  <span>{error}</span>
                 </div>
               )}
 
-              <form
-                onSubmit={handleLogin}
-                className="space-y-5"
-              >
+              <form onSubmit={handleLogin} className="space-y-5">
                 <div>
-                  <label className="text-sm text-gray-300 block mb-3">
+                  <label className="text-xs font-semibold uppercase tracking-wider text-slate-400 block mb-2">
                     Email Address
                   </label>
-
-                  <input
-                    type="email"
-                    required
-                    value={email}
-                    disabled={isLoading}
-                    onChange={(e) =>
-                      setEmail(
-                        e.target.value
-                      )
-                    }
-                    placeholder="admin@company.com"
-                    className="w-full bg-white/5 border border-white/10 focus:border-blue-400 outline-none rounded-2xl px-5 py-4 text-white placeholder:text-gray-500 transition"
-                  />
+                  <div className="relative">
+                    <Mail className="absolute left-4 top-3.5 h-4 w-4 text-slate-500" />
+                    <input
+                      type="email"
+                      required
+                      value={email}
+                      disabled={isLoading}
+                      onChange={(e) => setEmail(e.target.value)}
+                      placeholder="admin@company.com"
+                      className="w-full bg-slate-950/60 border border-slate-800 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/10 outline-none rounded-xl pl-11 pr-5 py-3 text-sm text-white placeholder:text-slate-600 transition-all disabled:opacity-50"
+                    />
+                  </div>
                 </div>
 
                 <div>
-                  <label className="text-sm text-gray-300 block mb-3">
-                    Password
+                  <label className="text-xs font-semibold uppercase tracking-wider text-slate-400 block mb-2">
+                    System Password
                   </label>
-
-                  <input
-                    type="password"
-                    required
-                    value={password}
-                    disabled={isLoading}
-                    onChange={(e) =>
-                      setPassword(
-                        e.target.value
-                      )
-                    }
-                    placeholder="••••••••"
-                    className="w-full bg-white/5 border border-white/10 focus:border-blue-400 outline-none rounded-2xl px-5 py-4 text-white placeholder:text-gray-500 transition"
-                  />
+                  <div className="relative">
+                    <Lock className="absolute left-4 top-3.5 h-4 w-4 text-slate-500" />
+                    <input
+                      type="password"
+                      required
+                      value={password}
+                      disabled={isLoading}
+                      onChange={(e) => setPassword(e.target.value)}
+                      placeholder="••••••••"
+                      className="w-full bg-slate-950/60 border border-slate-800 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/10 outline-none rounded-xl pl-11 pr-5 py-3 text-sm text-white placeholder:text-slate-600 transition-all disabled:opacity-50"
+                    />
+                  </div>
                 </div>
 
                 <button
                   type="submit"
-                  disabled={
-                    isLoading
-                  }
-                  className="w-full bg-white text-black hover:scale-[1.02] transition-all duration-300 py-4 rounded-2xl font-bold text-lg disabled:opacity-50 mt-4"
+                  disabled={isLoading}
+                  className="w-full inline-flex items-center justify-center gap-2 bg-slate-100 hover:bg-white active:scale-[0.99] text-slate-950 transition-all duration-200 py-3 rounded-xl font-bold text-sm disabled:opacity-50 mt-3 shadow-lg shadow-white/5"
                 >
-                  {isLoading
-                    ? "Authenticating..."
-                    : "Enter Dashboard"}
+                  {isLoading ? (
+                    "Verifying Identity..."
+                  ) : (
+                    <>
+                      Enter Dashboard <ArrowRight className="w-4 h-4" />
+                    </>
+                  )}
                 </button>
               </form>
 
-              {/* Footer */}
-              <div className="mt-8 pt-6 border-t border-white/10 flex items-center justify-between text-sm text-gray-500">
-                <span>
-                  Protected Session
-                </span>
-
-                <span>
-                  v1.0 Enterprise
-                </span>
+              {/* System Compliance Subtext */}
+              <div className="mt-8 pt-5 border-t border-slate-900 flex items-center justify-between text-[11px] font-semibold uppercase tracking-wider text-slate-500">
+                <span>Protected Session</span>
+                <span>v1.0 Enterprise</span>
               </div>
             </div>
           </div>
         </div>
+      </div>
+    </div>
+  );
+}
+
+/* Local Component Helper for Metrics Display */
+function MetricBlock({ label, value, icon: Icon }) {
+  return (
+    <div className="bg-slate-900/30 border border-slate-800/60 backdrop-blur-xs rounded-2xl p-4 flex items-center gap-3.5">
+      <div className="p-2.5 rounded-xl bg-slate-950/60 border border-slate-800 text-slate-400">
+        <Icon className="w-4 h-4" />
+      </div>
+      <div>
+        <h3 className="text-lg font-bold tracking-tight text-slate-200">{value}</h3>
+        <p className="text-[10px] font-semibold text-slate-500 uppercase tracking-wider mt-0.5">{label}</p>
       </div>
     </div>
   );
