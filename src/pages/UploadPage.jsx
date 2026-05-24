@@ -254,23 +254,48 @@ export default function UploadPage() {
           <div className="absolute bottom-[-10%] right-[-10%] w-[500px] h-[500px] bg-blue-600/10 rounded-full blur-[120px]" />
         </div>
 
-        <div className="relative z-10 max-w-xl w-full bg-slate-900/40 border border-slate-800/80 rounded-[2.5rem] p-10 text-center backdrop-blur-xl shadow-2xl shadow-black/50">
+        <div className="relative z-10 max-w-2xl w-full bg-slate-900/40 border border-slate-800/80 rounded-[2.5rem] p-10 text-center backdrop-blur-xl shadow-2xl shadow-black/50">
+
+          {/* BIG LOGO */}
+          <img
+            src="/logo.jpeg"
+            alt="Audizy Logo"
+            className="h-28 sm:h-36 mx-auto mb-8 object-contain drop-shadow-2xl"
+          />
+
           <div className="w-20 h-20 rounded-3xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center mx-auto mb-8 text-emerald-400 shadow-inner">
             <CheckCircle2 className="w-9 h-9" />
           </div>
 
-          <img src="/logo.jpeg" alt="Audizy Logo" className="h-7 mx-auto mb-5" />
-          <h1 className="text-3xl font-extrabold tracking-tight text-white">Transmission Verified</h1>
+          <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-white">
+            Transmission Verified
+          </h1>
+
           <p className="text-slate-400 mt-4 text-sm sm:text-base leading-relaxed font-medium">
-            Your field record has been cryptographically sealed and pushed down the pipeline for immediate review.
+            Your field record has been cryptographically sealed and pushed down
+            the pipeline for immediate review.
           </p>
 
-          <div className="mt-8 bg-slate-950/60 border border-slate-800/80 rounded-2xl p-5 flex flex-col items-center">
+          {/* TOKEN DISPLAY */}
+          <div className="mt-8 bg-blue-500/10 border border-blue-500/20 rounded-2xl p-5">
+            <p className="text-[10px] font-semibold tracking-wider text-blue-300 uppercase">
+              Verification Token
+            </p>
+
+            <h2 className="mt-3 text-lg sm:text-2xl font-mono font-bold text-white break-all">
+              {token}
+            </h2>
+          </div>
+
+          {/* EMPLOYEE */}
+          <div className="mt-6 bg-slate-950/60 border border-slate-800/80 rounded-2xl p-5 flex flex-col items-center">
             <p className="text-[10px] font-semibold tracking-wider text-slate-500 uppercase">
               Assigned Field Auditor
             </p>
+
             <h2 className="text-xl font-bold text-slate-200 mt-2 flex items-center gap-2">
-              <User className="w-4 h-4 text-blue-400" /> {employee}
+              <User className="w-4 h-4 text-blue-400" />
+              {employee}
             </h2>
           </div>
 
@@ -344,7 +369,7 @@ export default function UploadPage() {
           <div className="p-8 md:p-10 space-y-8">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <Input
-                label="Auditor Full Name"
+                label="Customer Full Name"
                 name="name"
                 value={form.name}
                 icon={User}
@@ -421,7 +446,7 @@ export default function UploadPage() {
                   <div className="bg-slate-950/60 border border-slate-800 rounded-2xl p-4">
                     <div className="flex items-center justify-between mb-2">
                       <p className="text-sm font-medium text-slate-300">
-                        Uploading to Bunny Stream
+                        Uploading...
                       </p>
 
                       <p className="text-sm text-blue-400 font-semibold">

@@ -48,7 +48,7 @@ export default function Login() {
         {/* Left Panel - Branding & Highlights (Desktop Only) */}
 
         <div className="hidden lg:flex flex-col justify-between p-16 border-r border-slate-900/60 bg-slate-950/20 backdrop-blur-xs">
-          <div> <img src="/logo.jpeg" alt="Brand Logo" className="h-16 rounded-full my-4" />
+          <div> <img src="/logo.jpeg" alt="Brand Logo" className="h-20 rounded-full my-4" />
             <div className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-slate-900/80 border border-slate-800/80 backdrop-blur-md">
 
 
