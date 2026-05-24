@@ -83,7 +83,7 @@ export default function Admin() {
                 {/* Header */}
                 <header className="sticky top-0 z-50 border-b border-slate-800/80 backdrop-blur-md bg-slate-950/50">
                     <div className="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-between">
-                        <img src="/logo.png" alt="Brand Logo" className="h-12 my-3 rounded-lg " />
+                        <img src="/logo.jpeg" alt="Brand Logo" className="h-12 my-3 rounded-lg " />
                         <div className="hidden md:block">
 
                             <h1 className=" text-xl sm:text-2xl font-bold tracking-tight bg-gradient-to-r from-white via-slate-200 to-slate-400 bg-clip-text text-transparent">
