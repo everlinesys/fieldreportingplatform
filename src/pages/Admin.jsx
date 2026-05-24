@@ -16,10 +16,10 @@ export default function Admin() {
         useState("links");
 
     const frontendUrl =
-        "http://localhost:5173";
+        "https://field-reporting-smoky.vercel.app";
 
     const backendUrl =
-        "http://localhost:5020";
+        "https://fieldreportingapi.everlinesystems.in";
 
     const createLink = async () => {
         if (!employee.trim()) return;
