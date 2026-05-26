@@ -314,7 +314,7 @@ export default function UploadPage() {
         <div className="w-16 h-16 rounded-2xl bg-blue-500/10 border border-blue-500/20 flex items-center justify-center mx-auto mb-6 text-blue-400">
           <AlertCircle className="w-7 h-7" />
         </div>
-        <img src="/logo.jpeg" alt="Audizy Logo" className="h-6 mx-auto mb-4 opacity-40 mix-blend-luminosity" />
+        <img src="/logo.jpeg" alt="Audizy Logo" className="h-12 rounded-full mx-auto mb-4  mix-blend-luminosity" />
         <h1 className="text-2xl font-bold tracking-tight text-slate-100">Resolving Submission Context</h1>
         <p className="text-sm text-slate-400 mt-3 leading-relaxed font-medium">
           Fetching secure metadata and validating submission token. Please wait...
@@ -337,7 +337,7 @@ export default function UploadPage() {
           <div className="border-b border-slate-800/60 p-8 md:p-10 flex flex-col md:flex-row md:items-start justify-between gap-6 bg-slate-950/20">
             <div className="space-y-3">
               <div className="flex items-center gap-3">
-                <img src="/logo.jpeg" alt="Audizy Logo" className="h-6 w-auto object-contain" />
+                <img src="/logo.jpeg" alt="Audizy Logo" className="h-12 w-auto object-contain rounded-full" />
                 <div className="h-4 w-[1px] bg-slate-800" />
                 <p className="text-[11px] font-bold uppercase tracking-widest text-blue-400">
                   Compliance Module
