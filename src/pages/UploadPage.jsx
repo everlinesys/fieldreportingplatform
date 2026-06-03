@@ -38,7 +38,7 @@ export default function UploadPage() {
       const res = await api.get(`/upload/${token}/details`);
       setEmployee(res.data.employee);
       if (res.data.used) {
-        setUsed(true);
+        // setUsed(true);
       }
     } catch (error) {
       console.error(error);
@@ -260,7 +260,7 @@ export default function UploadPage() {
           <img
             src="/logo.jpeg"
             alt="Audizy Logo"
-            className="h-28 sm:h-36 mx-auto mb-8 object-contain drop-shadow-2xl"
+            className="h-28 sm:h-36 mx-auto mb-8 object-contain drop-shadow-2xl rounded-full "
           />
 
           <div className="w-20 h-20 rounded-3xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center mx-auto mb-8 text-emerald-400 shadow-inner">
@@ -283,7 +283,7 @@ export default function UploadPage() {
             </p>
 
             <h2 className="mt-3 text-lg sm:text-2xl font-mono font-bold text-white break-all">
-              {token}
+              {token.toUpperCase()}
             </h2>
           </div>
 
